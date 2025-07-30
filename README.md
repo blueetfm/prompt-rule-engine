@@ -5,11 +5,11 @@ testing json rule engine for LTA Prompt
 ## Installation
 
 ```
-npm install json-rules-engine
+$ npm install json-rules-engine
 ```
 
 ## Running
 
 ```
-node index.js
+$ node index.js
 ```
