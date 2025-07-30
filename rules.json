@@ -1,0 +1,49 @@
+{
+  "priority-rule": {
+    "conditions": {
+      "all": {
+        "fact": "roadwork",
+        "path": "$.priority",
+
+        "operator": "lessThan",
+
+        "value": {
+          "fact": "other",
+          "path": "$.priority"
+        }
+      }
+    },
+    "event": {
+      "type": "first-by-priority",
+      "params": {
+        "first": "roadwork",
+        "last": "other",
+        "message": ""
+      }
+    },
+    "priority": 10
+  },
+
+  "priority-rule-mirror": {
+    "conditions": {
+      "all": {
+        "fact": "other",
+        "path": "$.priority",
+
+        "operator": "lessThan",
+
+        "value": {
+          "fact": "roadwork",
+          "path": "$.priority"
+        }
+      }
+    },
+    "event": {
+      "type": "first-by-priority",
+      "params": {
+        "first": "other",
+        "last": "roadwork"
+      }
+    }
+  }
+}

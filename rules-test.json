@@ -1,0 +1,144 @@
+{
+  "priority-rule": {
+    "conditions": {
+      "all": {
+        "fact": "roadwork",
+        "path": "$.priority",
+
+        "operator": "lessThan",
+
+        "value": {
+          "fact": "other",
+          "path": "$.priority"
+        }
+      }
+    },
+    "event": {
+      "type": "first-by-priority",
+      "params": {
+        "first": "roadwork",
+        "last": "other",
+        "message": ""
+      }
+    },
+    "priority": 10
+  },
+
+  "priority-rule-mirror": {
+    "conditions": {
+      "all": {
+        "fact": "other",
+        "path": "$.priority",
+
+        "operator": "lessThan",
+
+        "value": {
+          "fact": "roadwork",
+          "path": "$.priority"
+        }
+      }
+    },
+    "event": {
+      "type": "first-by-priority",
+      "params": {
+        "first": "other",
+        "last": "roadwork"
+      }
+    }
+  },
+
+  "date-overlap-rule": {
+    "conditions": {
+      "all": [
+        {
+          "fact": "roadwork",
+          "path": "$.priority",
+
+          "operator": "equal",
+
+          "value": {
+            "fact": "other",
+            "path": "$.priority"
+          }
+        },
+        {
+          "fact": "roadwork",
+          "path": "$.proposedEnd",
+
+          "operator": "earlierThan",
+
+          "value": {
+            "fact": "roadwork",
+            "path": "$.proposedStart"
+          }
+        }
+      ],
+      "event": {
+        "type": "winner-by-earlier-date",
+        "params": {
+          "first": "roadwork",
+          "last": "other"
+        }
+      }
+    }
+  },
+  "date-overlap-rule-mirror": {
+    "conditions": {
+      "all": [
+        {
+          "fact": "roadwork",
+          "path": "$.priority",
+
+          "operator": "equal",
+
+          "value": {
+            "fact": "other",
+            "path": "$.priority"
+          }
+        },
+        {
+          "fact": "other",
+          "path": "$.proposedEnd",
+
+          "operator": "earlierThan",
+
+          "value": {
+            "fact": "roadwork",
+            "path": "$.proposedStart"
+          }
+        }
+      ],
+      "event": {
+        "type": "winner-by-earlier-date",
+        "params": {
+          "first": "other",
+          "last": "roadwork"
+        }
+      }
+    }
+  },
+
+  "different-duration-rule": {
+    "conditions": {
+      "all": {
+        "fact": "roadwork",
+        "path": "$.duration",
+
+        "operator": "lessThan",
+
+        "value": {
+          "fact": "other",
+          "path": "$.duration"
+        }
+      },
+      "event": {
+        "type": "roadworks-different-durations",
+        "params": {
+          "first": "roadwork",
+          "last": "other",
+          "message": ""
+        }
+      }
+    }
+  }
+}
